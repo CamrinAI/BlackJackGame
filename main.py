@@ -1,9 +1,14 @@
 import random
 from art import logo
+
+
+# Return a random card value (Ace starts as 11).
 def deal_card():
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     return random.choice(cards)
 
+
+# Compute score, handling blackjack and Ace reduction.
 def calculate_score(cards):
         score = sum(cards)
         if score == 21 and len(cards) == 2:
@@ -18,6 +23,7 @@ def play_game():
     print(logo)
     user_cards = []
     computer_cards = []
+    # Initial deal: two cards each.
     for _ in range(2):
         user_cards.append(deal_card())
         computer_cards.append(deal_card())
@@ -35,6 +41,7 @@ def play_game():
                 user_cards.append(deal_card())
             if user_request == "n":
                 is_game_over = True
+    # Dealer draws until 17 or blackjack.
     if current_score != 0 and current_score <= 21:
         while computer_score != 0 and computer_score < 17:
             computer_cards.append(deal_card())
@@ -58,9 +65,9 @@ def play_game():
         print(f"You Win the User had {current_score} > {computer_score}")
     print(f"The User had {user_cards} and the computer had {computer_cards}")
 
+# Main replay loop.
 while input("Would You like to play Again y for yes n for no: ") == "y":
     print("\n" * 20)
     play_game()
-
 
 
